@@ -6,6 +6,8 @@ const register = async (req, res, next) => {
   try {
     const newUser = await registerService.createUser({ name, email, password });
 
+    if (newUser.message) return res.status(409).json(newUser.message);
+    
     const token = signToken({ name: newUser.name, email: newUser.password });
     return res.status(201).json(token);
   } catch (error) {
