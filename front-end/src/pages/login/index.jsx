@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import ErrorMessage from '../../components/ErrorMessage';
 import './login.css';
 
 function Login() {
@@ -10,11 +11,32 @@ function Login() {
     email: '',
     password: '',
   });
+
   const [isDisabled, setIsDisabled] = useState(true);
+  const [failedTryLogin, setFailedTryLogin] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
     setLogin({ ...login, [name]: value });
+  };
+
+  const loginInto = async (e) => {
+    e.preventDefault();
+
+    try {
+      const endpoint = '/login';
+
+      // const { token, user } = await requestLogin(endpoint, { email, password });
+      const dataLogin = await requestLogin(endpoint, login);
+
+      // localStorage.setItem('user', JSON.stringify({ token, ...user }));
+      localStorage.setItem('user', JSON.stringify(dataLogin));
+      setIsLogged(true);
+    } catch (error) {
+      setFailedTryLogin(true);
+      setIsLogged(false);
+    }
   };
 
   const handleRegister = () => {
@@ -33,10 +55,12 @@ function Login() {
     }
   }, [login]);
 
+  if (isLogged) return <Navigate to="/customer/products" />;
+
   return (
     <div>
       <form
-        // onSubmit={ (e) => }
+        onSubmit={ (e) => loginInto(e) }
         className="container-form"
       >
         <label htmlFor="email" className="inputs-login">
@@ -77,6 +101,7 @@ function Login() {
         >
           Ainda não tenho conta
         </button>
+        { failedTryLogin && <ErrorMessage /> }
       </form>
     </div>
   );
