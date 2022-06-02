@@ -1,11 +1,11 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
@@ -32,7 +32,7 @@ function Register() {
         <button
           data-testid="common_register__button-register"
           type="button"
-          onClick={handleRegister}
+          onClick={ handleRegister }
         >
           Confirmar
         </button>
