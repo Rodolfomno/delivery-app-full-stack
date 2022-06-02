@@ -1,8 +1,15 @@
+const bcrypt = require('bcrypt');
 const { Users } = require('../../database/models');
 
-const getUser = async (email, _password) => {
+const getUser = async (email, password) => {
   const user = await Users.findOne({ where: { email } });
-  console.log(user);
+
+  if (!user) return false;
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) return false;
+
   return user;
 };
 
