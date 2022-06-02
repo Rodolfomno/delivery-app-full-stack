@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const md5 = require('md5');
 const { Users } = require('../../database/models');
 
 const getUser = async (email, password) => {
@@ -6,9 +6,9 @@ const getUser = async (email, password) => {
 
   if (!user) return false;
 
-  const isPasswordValid = await bcrypt.compare(password, user.password);
+  const hashPassword = md5(password);
 
-  if (!isPasswordValid) return false;
+  if (hashPassword !== user.password) return false;
 
   return user;
 };
