@@ -2,8 +2,10 @@ import React from 'react';
 
 function ErrorMessage() {
   return (
-    <span>
-      <p>Mensagem de erro!</p>
+    <span
+      className="common_login__element-invalid-email"
+    >
+      Mensagem de erro!
     </span>
   );
 }
