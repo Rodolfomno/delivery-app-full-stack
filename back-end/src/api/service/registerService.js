@@ -1,9 +1,18 @@
+const md5 = require('md5');
 const { Users } = require('../../database/models');
 
 const createUser = async (user) => {
-  const newUser = await Users.create({ ...user, role: 'customer' });
-  console.log(newUser);
+  const checkExists = await Users.findOne({ where: { email: user.email } });
+  if (checkExists) return { message: 'User already exists' };
+
+  const hash = md5(user.password); 
+  const newUser = await Users.create({
+    name: user.name,
+    email: user.email,
+    password: hash,
+    role: 'customer',
+  });
+
   return newUser;
 };
-
 module.exports = { createUser };
