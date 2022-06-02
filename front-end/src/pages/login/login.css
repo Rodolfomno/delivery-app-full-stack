@@ -1,0 +1,9 @@
+.container-form {
+  display: flex;
+  flex-direction: column;
+  height: 444px;
+  margin: auto;
+  margin-top: 200px;
+  row-gap: 10px;
+  width: 425px;
+}
