@@ -6,4 +6,13 @@ const getUser = async (email, _password) => {
   return user;
 };
 
-module.exports = { getUser };
+const create = async (user) => {
+  const newUser = await Users.create({ ...user, role: 'customer' });
+  console.log(newUser);
+  return newUser;
+};
+
+module.exports = { 
+  getUser, 
+  create,
+};
