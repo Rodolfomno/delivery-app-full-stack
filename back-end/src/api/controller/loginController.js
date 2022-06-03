@@ -4,24 +4,6 @@ const loginService = require('../service/loginService');
 
 const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' }).trim();
 
-const addUser = async (req, res, next) => {
-  const { name, email, password } = req.body;
-  try {
-    const newUser = await loginService.create({ name, email, password });
-    
-    const jwtConfig = {
-      expiresIn: '7d',
-      algorithm: 'HS256',
-    };
-
-    const token = jwt.sign({ data: newUser }, secret, jwtConfig);
-    return res.status(201).json(token);
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
-
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -47,6 +29,5 @@ const login = async (req, res, next) => {
 };
 
 module.exports = { 
-  addUser,
   login,
 };
