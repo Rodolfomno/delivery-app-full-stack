@@ -4,6 +4,8 @@ import { requestLogin } from '../../service/request';
 import ErrorMessage from '../../components/ErrorMessage';
 import './register.css';
 
+// test
+
 function Register() {
   // const navigate = useNavigate();
   const NUMBER = 6;
