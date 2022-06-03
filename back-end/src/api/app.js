@@ -9,8 +9,6 @@ app.use(express.json());
 
 app.use(auth, express.static('public'));
 
-app.get('/coffee', (_req, res) => res.status(418).end());
-
 app.use(routes);
 
 app.use(errorMiddleware);
