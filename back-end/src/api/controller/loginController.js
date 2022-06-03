@@ -3,15 +3,6 @@ const jwt = require('jsonwebtoken');
 const loginService = require('../service/loginService');
 
 const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' }).trim();
-const getUserConstroller = async (req, res, _next) => {
-  const { email, password } = req.body;
-
-  const user = await loginService.getUser(email, password);
-
-  if (!user) return res.status(401).json({ message: 'sei la' });
-
-  res.status(200).json(user);
-};
 
 const addUser = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -34,8 +25,8 @@ const addUser = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await loginService.getUser(email);
-    if (!user || user.password !== password) {
+    const user = await loginService.getUser(email, password);
+    if (!user) {
       return res.status(400).json({ message: 'Invalid fields' });
     } 
 
@@ -45,7 +36,10 @@ const login = async (req, res, next) => {
     };
 
     const token = jwt.sign({ data: user }, secret, jwtConfig);
-    return res.status(200).json(token);
+
+    const response = { ...user.dataValues, token };
+
+    return res.status(200).json(response);
   } catch (error) {
     console.log(error);
     next(error);
@@ -53,7 +47,6 @@ const login = async (req, res, next) => {
 };
 
 module.exports = { 
-  getUserConstroller, 
   addUser,
   login,
 };
