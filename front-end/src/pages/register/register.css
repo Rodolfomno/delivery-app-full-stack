@@ -7,3 +7,8 @@
   row-gap: 10px;
   width: 425px;
 }
+
+.inputs-login {
+  display: flex;
+  flex-direction: column;
+}
