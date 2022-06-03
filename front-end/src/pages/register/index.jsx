@@ -101,7 +101,7 @@ function Register() {
         </label>
 
         <button
-          data-testid="common_login__button-login"
+          data-testid="common_register__button-register"
           type="submit"
           disabled={ isDisabled }
         >
