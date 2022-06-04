@@ -66,7 +66,7 @@ function Register() {
   return (
     <div>
       <form onSubmit={ (e) => registerInto(e) } className="container-form">
-        <label htmlFor="email" className="inputs-login">
+        <label htmlFor="email" className="inputs-register">
           Name
           <input
             data-testid="common_register__input-name"
