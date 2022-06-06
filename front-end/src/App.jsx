@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
-import Login from './pages/login';
-import Register from './pages/register';
-import Products from './pages/products';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Products from './pages/Products';
 import Orders from './pages/Orders';
 // import Checkout from './pages/Checkout';
 import './App.css';
