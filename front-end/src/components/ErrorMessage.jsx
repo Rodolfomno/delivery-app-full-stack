@@ -1,13 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-function ErrorMessage() {
+function ErrorMessage({ testid }) {
   return (
     <span
-      className="common_login__element-invalid-email"
+      data-testis={ testid }
     >
       Mensagem de erro!
     </span>
   );
 }
+
+ErrorMessage.propTypes = {
+  testid: PropTypes.string.isRequired,
+};
 
 export default ErrorMessage;
