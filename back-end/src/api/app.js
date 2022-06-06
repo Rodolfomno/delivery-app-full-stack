@@ -9,10 +9,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use(auth, express.static('public'));
-
 app.use(routes);
 
+app.use(auth, express.static('public'));
 app.use(errorMiddleware);
 
 module.exports = app;
