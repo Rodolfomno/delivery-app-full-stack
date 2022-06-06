@@ -2,14 +2,19 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 import Login from './pages/login';
 import Register from './pages/register';
+import Products from './pages/products';
+import Orders from './pages/Orders';
+// import Checkout from './pages/Checkout';
 import './App.css';
-// import rockGlass from './images/rockGlass.svg';
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
+      <Route path="/customer/products" element={ <Products /> } />
+      <Route path="/customer/orders" element={ <Orders /> } />
+      {/* <Route path="/customer/checkout" element={ <Checkout /> } /> */}
       <Route expec path="/" element={ <Navigate to="/login" /> } />
     </Routes>
   );

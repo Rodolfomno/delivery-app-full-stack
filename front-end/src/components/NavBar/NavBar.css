@@ -1,0 +1,50 @@
+* {
+  border: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --altura-nav-e-buttons: 55px;
+}
+
+nav {
+  background-color: #036b52;
+  display: flex;
+  height: var(--altura-nav-e-buttons);
+  justify-content: space-between;
+  width: 100vw;
+}
+
+nav button {
+  color: #f2fffc;
+}
+
+.btn-routes button {
+  background: #036b52;
+  height: var(--altura-nav-e-buttons);
+  width: 15rem;
+}
+
+
+.btn-login button:nth-child( 1 ) {
+  background-color: #421981;
+  height: var(--altura-nav-e-buttons);
+  width: 15rem;
+
+}
+
+.btn-login button:nth-child( 2 ) {
+  background-color: #056cf9;
+  height: var(--altura-nav-e-buttons);
+  width: 7.5rem;
+
+}
+
+.btn-routes button:focus {
+  background: #2fc18c;
+  color: #001813;
+}
