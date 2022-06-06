@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './NavBar.css';
 
 function NavBar() {
+  const [dataUser, setDataUser] = useState({});
+
+  useEffect(() => {
+    setDataUser({ ...JSON.parse(localStorage.getItem('user')) });
+  }, []);
   return (
     <nav>
       <div className="btn-routes">
@@ -23,7 +28,7 @@ function NavBar() {
           data-testid="customer_products__element-navbar-user-full-name"
           type="button"
         >
-          Usuário
+          { dataUser.name }
         </button>
         <button
           data-testid="customer_products__element-navbar-link-logout"
