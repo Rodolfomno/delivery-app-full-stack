@@ -22,12 +22,14 @@ function NavBar() {
         <button
           data-testid="customer_products__element-navbar-link-products"
           type="button"
+          onClick={ () => navigate('/customer/products') }
         >
           PRODUTOS
         </button>
         <button
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
+          onClick={ () => navigate('/customer/orders') }
         >
           MEUS PEDIDOS
         </button>
