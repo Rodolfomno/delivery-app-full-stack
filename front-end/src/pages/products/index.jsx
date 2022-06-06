@@ -3,7 +3,10 @@ import NavBar from '../../components/NavBar';
 
 function Products() {
   return (
-    <NavBar />
+    <>
+      <NavBar />
+      <h1>PRODUTOS</h1>
+    </>
   );
 }
 

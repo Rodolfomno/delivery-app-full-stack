@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
 function NavBar() {
+  const navigate = useNavigate();
+
   const [dataUser, setDataUser] = useState({});
 
   useEffect(() => {
     setDataUser({ ...JSON.parse(localStorage.getItem('user')) });
   }, []);
+
+  const logOut = () => {
+    navigate('/login');
+    localStorage.clear();
+  };
+
   return (
     <nav>
       <div className="btn-routes">
@@ -33,6 +42,7 @@ function NavBar() {
         <button
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
+          onClick={ logOut }
         >
           SAIR
         </button>
