@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
+import { requestLogin } from '../../service/request';
 import ErrorMessage from '../../components/ErrorMessage';
 import { requestLogin } from '../../service/request';
 import './login.css';
@@ -24,17 +25,17 @@ function Login() {
 
   const loginInto = async (e) => {
     e.preventDefault();
-
+    const endpoint = '/login';
     try {
-      const endpoint = '/login';
-
       // const { token, user } = await requestLogin(endpoint, { email, password });
       const dataLogin = await requestLogin(endpoint, login);
       // localStorage.setItem('user', JSON.stringify({ token, ...user }));
       localStorage.setItem('user', JSON.stringify(dataLogin));
       setIsLogged(true);
     } catch (error) {
+
       console.log('ERRO:', error);
+
       setFailedTryLogin(true);
       setIsLogged(false);
     }
