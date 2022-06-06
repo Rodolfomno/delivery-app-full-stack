@@ -102,7 +102,8 @@ function Login() {
         >
           Ainda não tenho conta
         </button>
-        { failedTryLogin && <ErrorMessage /> }
+        { failedTryLogin
+          && <ErrorMessage testid="common_login__element-invalid-email" /> }
       </form>
     </div>
   );
