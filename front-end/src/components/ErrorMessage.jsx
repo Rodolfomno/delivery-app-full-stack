@@ -4,7 +4,7 @@ import React from 'react';
 function ErrorMessage({ testid }) {
   return (
     <span
-      data-testis={ testid }
+      data-testid={ testid }
     >
       Mensagem de erro!
     </span>
