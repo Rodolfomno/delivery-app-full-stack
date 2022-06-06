@@ -28,8 +28,9 @@ function Login() {
     try {
       // const { token, user } = await requestLogin(endpoint, { email, password });
       const dataLogin = await requestLogin(endpoint, login);
+      const { name, email, role, token } = dataLogin;
       // localStorage.setItem('user', JSON.stringify({ token, ...user }));
-      localStorage.setItem('user', JSON.stringify(dataLogin));
+      localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
       setIsLogged(true);
     } catch (error) {
       console.log('ERRO:', error);
