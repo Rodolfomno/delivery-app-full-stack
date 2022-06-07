@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import CardProduct from '../../components/CardProduc';
-import CarButton from '../../components/CarButton/inde';
+import CarButton from '../../components/CarButton';
 import './Products.css';
 
 function Products() {
