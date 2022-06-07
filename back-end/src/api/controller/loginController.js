@@ -1,4 +1,4 @@
-const jwt = require('../../utils/jwt');
+const jwt = require('../utils/jwt');
 const loginService = require('../service/loginService');
 
 const login = async (req, res, next) => {

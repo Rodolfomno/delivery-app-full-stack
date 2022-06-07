@@ -1,4 +1,4 @@
-const jwt = require('../../utils/jwt');
+const jwt = require('../utils/jwt');
 const registerService = require('../service/registerService');
 
 const register = async (req, res, next) => {

@@ -1,4 +1,4 @@
-const jwt = require('../utils/jwt');
+const jwt = require('../api/utils/jwt');
 
 module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
