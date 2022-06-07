@@ -88,6 +88,32 @@ describe('Testes de integração para rota "/checkout"', () => {
       expect(chaiHttpResponse.status).to.be.equal(409);
       expect(chaiHttpResponse.body.message).to.be.equal('Seller and customer cannot be the same');
     })
+    it('4 - Caso os produtos vendidos não estejam cadastrados', async () => {
+      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+        "userId": 3,
+        "sellerId": 2,
+        "totalPrice": 100,
+        "deliveryAddress": "Rua da Margura",
+        "deliveryNumber": 997811212,
+        "products": [
+          {
+            "productId": 4,
+            "quantity": 6
+          },
+          {
+            "productId": 25,
+            "quantity": 6
+          },
+          {
+            "productId": 9,
+            "quantity": 6
+          }
+        ]
+      });
+
+      expect(chaiHttpResponse.status).to.be.equal(404);
+      expect(chaiHttpResponse.body.message).to.be.equal('Products not found');
+    })
     it('5 - Caso a requisição tenha o formato esperado', async () => {
       before(async () => {
         sinon.stub(Sales, 'create').resolves({ id: 1 });
