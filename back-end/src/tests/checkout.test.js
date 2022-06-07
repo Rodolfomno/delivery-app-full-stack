@@ -62,5 +62,35 @@ describe('Testes de integração para rota "/checkout"', () => {
       expect(chaiHttpResponse.status).to.be.equal(400);
       expect(chaiHttpResponse.body.message).to.be.equal('"sellerId" must be a number');
     })
+    it('3 - Caso a requisição tenha o formato esperado', async () => {
+      before(async () => {
+        sinon.stub(Sales, 'create').resolves({ id: 1 });
+        sinon.stub(SalesProducts, 'create').resolves();
+      })
+      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+        "userId": 3,
+        "sellerId": 2,
+        "totalPrice": 100,
+        "deliveryAddress": "Rua da Margura",
+        "deliveryNumber": 997811212,
+        "products": [
+          {
+            "productId": 4,
+            "quantity": 6
+          },
+          {
+            "productId": 5,
+            "quantity": 6
+          },
+          {
+            "productId": 9,
+            "quantity": 6
+          }
+        ]
+      });
+
+      expect(chaiHttpResponse.status).to.be.equal(201);
+      expect(chaiHttpResponse.body).to.be.have.property('saleId');
+    })
   })
 })
