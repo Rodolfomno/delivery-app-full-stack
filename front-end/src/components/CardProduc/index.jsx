@@ -9,7 +9,7 @@ function CardProduct({ product }) {
     <div className="card">
       <div className="card-img-price">
         <span data-testid={ `customer_products__element-card-price-${id}` }>
-          { price }
+          { `R$ ${price}` }
         </span>
         <img
           src={ urlImage }
