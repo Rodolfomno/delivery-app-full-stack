@@ -10,3 +10,9 @@
   position: fixed;
   width: 289.25px;
 }
+
+.car-btn:hover {
+  background-color: #039270;
+  cursor: pointer;
+  transition: 10;
+}
