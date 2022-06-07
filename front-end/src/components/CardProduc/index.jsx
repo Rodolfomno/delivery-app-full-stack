@@ -29,7 +29,7 @@ function CardProduct({ product }) {
 
 CardProduct.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.string,
     urlImage: PropTypes.string,
