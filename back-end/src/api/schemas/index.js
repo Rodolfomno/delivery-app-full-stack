@@ -1,3 +1,4 @@
 const loginSchema = require('./login');
+const saleSchema = require('./sale');
 
-module.exports = { loginSchema };
+module.exports = { loginSchema, saleSchema };
