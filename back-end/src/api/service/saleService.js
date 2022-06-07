@@ -1,7 +1,7 @@
 const moment = require('moment');
 const { Sales, SalesProducts } = require('../../database/models');
 
-module.exports = async (newSale, products) => {
+const create = async (newSale, products) => {
   if (newSale.sellerId === newSale.userId) {
     return { message: 'Seller and customer cannot be the same' };
   }
@@ -20,3 +20,18 @@ module.exports = async (newSale, products) => {
 
   return insertedId;
 };
+
+const findAllSalesByUserId = async (userId) => {
+  try {
+    const sales = await Sales.findAll({
+      where: { userId },
+      attributes: ['id', 'saleDate', 'totalPrice', 'status'],
+    });
+
+    return sales;
+  } catch (err) {
+    return { message: 'No orders found for this customer' };
+  }
+};
+
+module.exports = { create, findAllSalesByUserId };
