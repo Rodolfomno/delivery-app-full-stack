@@ -13,6 +13,26 @@
   width: 245.7px;
 }
 
+.card-img-price span {
+  background-color: #f2fffcd4;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  height: 31.5px;
+  margin-left: 9px;
+  margin-top: 8px;
+  position: absolute;
+  text-align: center;
+  width: 77px;
+}
+
+.card-img-price img {
+  display: block;
+  height: 232.05px;
+  text-align: center;
+  width: 244px;
+}
+
 .card-un-desc {
   align-items: center;
   background-color: #eaf1ef;
