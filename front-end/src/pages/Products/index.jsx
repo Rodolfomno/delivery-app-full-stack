@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import CardProduct from '../../components/CardProduc';
 import './Products.css';
 
 function Products() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const ls = JSON.parse(localStorage.getItem('products'));
+    setProducts([...ls]);
+  }, []);
   return (
     <>
       <NavBar />
-      {/* <h1>PRODUTOS</h1> */}
       <main>
-        <CardProduct />
+        {
+          products.map((product) => (
+            <CardProduct key={ product.id } product={ product } />
+          ))
+        }
       </main>
     </>
   );
