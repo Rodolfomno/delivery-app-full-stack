@@ -1,18 +1,18 @@
-import React from 'react';
-import MyContext from './MyContext';
+// import React from 'react';
+// import MyContext from './MyContext';
 
-function ProductsProvider({ children }) {
-  const contextValue = {};
+// function ProductsProvider({ children }) {
+//   const contextValue = {};
 
-  return (
-    <MyContext.Provider value={ contextValue }>
-      { children }
-    </MyContext.Provider>
-  );
-}
+//   return (
+//     <MyContext.Provider value={ contextValue }>
+//       { children }
+//     </MyContext.Provider>
+//   );
+// }
 
-ProductsProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// ProductsProvider.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };
 
-export default ProductsProvider;
+// export default ProductsProvider;
