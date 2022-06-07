@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { requestLogin, requestData } from '../../service/request';
+import { setToken, requestLogin, requestData } from '../../service/request';
 import ErrorMessage from '../../components/ErrorMessage';
 import './login.css';
 
@@ -29,7 +29,8 @@ function Login() {
     try {
       const dataLogin = await requestLogin(endpoint1, login);
       const { name, email, role, token } = dataLogin;
-      const data = requestData(endpoint2);
+      setToken(token);
+      const data = await requestData(endpoint2);
       localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
       localStorage.setItem('products', JSON.stringify(data));
       setIsLogged(true);
