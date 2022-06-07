@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { ProductsProvider } from './context/ProductsProvider';
 import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <ProductsProvider>
      <App />
+    </ProductsProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
