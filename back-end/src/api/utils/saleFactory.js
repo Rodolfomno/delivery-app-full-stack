@@ -4,9 +4,8 @@ const saleObject = (sale) => ({
   userId: sale.userId,
   sellerId: sale.sellerId,
   totalPrice: sale.totalPrice,
-  deliveryAdress: sale.deliveryAdress,
-  deviveryNumber: sale.deviveryNumber,
-  saleDate: sale.saleDate,
+  deliveryAddress: sale.deliveryAddress,
+  deliveryNumber: sale.deliveryNumber,
   status: saleStatus.PENDENTE,
 });
 
