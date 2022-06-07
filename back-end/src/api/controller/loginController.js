@@ -1,25 +1,18 @@
-const fs = require('fs');
-const jwt = require('jsonwebtoken');
+const jwt = require('../../utils/jwt');
 const loginService = require('../service/loginService');
-
-const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' }).trim();
 
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await loginService.getUser(email, password);
     if (!user) {
-      return res.status(400).json({ message: 'Invalid fields' });
+      return res.status(404).json({ message: 'Not Found' });
     } 
+    delete user.password;
 
-    const jwtConfig = {
-      expiresIn: '7d',
-      algorithm: 'HS256',
-    };
+    const token = jwt.sign(user);
 
-    const token = jwt.sign({ data: user }, secret, jwtConfig);
-
-    const response = { ...user.dataValues, token };
+    const response = { ...user, token };
 
     return res.status(200).json(response);
   } catch (error) {
