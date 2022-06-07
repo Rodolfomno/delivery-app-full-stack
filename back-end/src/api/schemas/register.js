@@ -3,7 +3,7 @@ const Joi = require('joi');
 const emptyField = 'All fields must be filled in correctly';
 
 const registerSchema = Joi.object({
-  name: Joi.string().length(2).required().messages({
+  name: Joi.string().min(2).required().messages({
     'string.min': 'Name must be longer than 2 characters',
     'any.required': emptyField,
     'string.empty': emptyField,
