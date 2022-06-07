@@ -11,9 +11,11 @@ function CardProduct({ product }) {
         <span data-testid={ `customer_products__element-card-price-${id}` }>
           { price }
         </span>
-        <span data-testid={ `customer_products__img-card-bg-image-${id}` }>
-          { urlImage }
-        </span>
+        <img
+          src={ urlImage }
+          data-testid={ `customer_products__img-card-bg-image-${id}` }
+          alt="imagem-de-bebida"
+        />
       </div>
       <div className="card-un-desc">
         <span data-testid={ `customer_products__element-card-title-${id}` }>
