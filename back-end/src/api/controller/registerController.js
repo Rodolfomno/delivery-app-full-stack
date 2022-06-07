@@ -10,7 +10,7 @@ const register = async (req, res, next) => {
     
     delete newUser.password;
     const token = jwt.sign(newUser);
-    return res.status(201).json({ newUser, token });
+    return res.status(201).json({ ...newUser, token });
   } catch (error) {
     console.log(error);
     next(error);
