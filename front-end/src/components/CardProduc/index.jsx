@@ -1,26 +1,37 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ButtonCardProduc from '../ButtonCardProduct';
 import './CardProduc.css';
 
-function CardProduct() {
-  // const [countProduct, setCountProduct] = useState(0);
+function CardProduct({ product }) {
+  const { id, name, price, urlImage } = product;
   return (
     <div className="card">
       <div className="card-img-price">
-        <span>$Preco</span>
-        <span>Imagem</span>
+        <span data-testid={ `customer_products__element-card-price-${id}` }>
+          { price }
+        </span>
+        <span data-testid={ `customer_products__img-card-bg-image-${id}` }>
+          { urlImage }
+        </span>
       </div>
       <div className="card-un-desc">
-        <span>Descricao</span>
-        <ButtonCardProduc />
-        {/* <div className="btn-rm-add">
-          <button type="button">-</button>
-          <span>{countProduct}</span>
-          <button type="button">+</button>
-        </div> */}
+        <span data-testid={ `customer_products__element-card-title-${id}` }>
+          { name }
+        </span>
+        <ButtonCardProduc id={ id } />
       </div>
     </div>
   );
 }
+
+CardProduct.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.string,
+    urlImage: PropTypes.string,
+  }).isRequired,
+};
 
 export default CardProduct;
