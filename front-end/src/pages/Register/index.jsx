@@ -107,7 +107,8 @@ function Register() {
         >
           Cadastrar
         </button>
-        {failedTryRegister && <ErrorMessage />}
+        {failedTryRegister
+          && <ErrorMessage testid="common_register__element-invalid_register" />}
       </form>
     </div>
   );
