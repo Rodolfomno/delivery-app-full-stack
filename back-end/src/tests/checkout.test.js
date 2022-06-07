@@ -36,5 +36,31 @@ describe('Testes de integração para rota "/checkout"', () => {
       expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body.message).to.be.equal('Incomplete address');
     })
+    it('2 - Caso a requisição NÂO tenha o formato esperado', async () => {
+      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+        "userId": 3,
+        "sellerId": "e",
+        "totalPrice": 100,
+        "deliveryAddress": "Rua da Margura",
+        "deliveryNumber": 997811212,
+        "products": [
+          {
+            "productId": 4,
+            "quantity": 6
+          },
+          {
+            "productId": 5,
+            "quantity": 6
+          },
+          {
+            "productId": 9,
+            "quantity": 6
+          }
+        ]
+      });
+
+      expect(chaiHttpResponse.status).to.be.equal(400);
+      expect(chaiHttpResponse.body.message).to.be.equal('"sellerId" must be a number');
+    })
   })
 })
