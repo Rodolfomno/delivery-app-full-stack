@@ -16,5 +16,15 @@ describe('Testes de integração para rota "/customer/orders:id"', () => {
       expect(chaiHttpResponse.status).to.be.equal(404);
       expect(chaiHttpResponse.body.message).to.be.equal('No orders found for this customer');
     })
+    it('2 - Caso exita pedidos do cliente requerido', async () => {
+      chaiHttpResponse = await chai.request(app).get('/customer/orders/3');
+
+      expect(chaiHttpResponse.status).to.be.equal(200);
+      expect(chaiHttpResponse.body).to.be.an('array');
+      expect(chaiHttpResponse.body[0]).to.be.have.property('id');
+      expect(chaiHttpResponse.body[0]).to.be.have.property('saleDate');
+      expect(chaiHttpResponse.body[0]).to.be.have.property('totalPrice');
+      expect(chaiHttpResponse.body[0]).to.be.have.property('status');
+    })
   })
 })
