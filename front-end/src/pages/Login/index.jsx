@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { requestLogin, requestData, setToken } from '../../service/request';
+=======
+import { setToken, requestLogin, requestData } from '../../service/request';
+>>>>>>> bb278e4aa2ed000553919fe291e3e0a7b6748b32
 import ErrorMessage from '../../components/ErrorMessage';
 import './login.css';
 

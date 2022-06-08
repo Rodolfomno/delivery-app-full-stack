@@ -1,0 +1,7 @@
+.container-orders {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 65px;
+  padding: 0;
+}
