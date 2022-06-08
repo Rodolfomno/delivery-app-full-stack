@@ -15,7 +15,7 @@ function ButtonCardProduc({ product }) {
     } else {
       setisDisabledButtonCart(false);
     }
-  }, [countProduct]);
+  }, [countProduct, setisDisabledButtonCart]);
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     if (cart.length) {

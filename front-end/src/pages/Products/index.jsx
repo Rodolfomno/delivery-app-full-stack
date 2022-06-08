@@ -10,7 +10,7 @@ function Products() {
   useEffect(() => {
     const ls = JSON.parse(localStorage.getItem('products'));
     setProducts([...ls]);
-  }, []);
+  }, [setProducts]);
   return (
     <>
       <NavBar />
