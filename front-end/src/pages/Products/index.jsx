@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import MyContext from '../../context/MyContext';
 import NavBar from '../../components/NavBar';
 import CardProduct from '../../components/CardProduc';
 import CarButton from '../../components/CarButton';
 import './Products.css';
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useContext(MyContext);
+  // const [products, setProducts] = useState([]);
   useEffect(() => {
     const ls = JSON.parse(localStorage.getItem('products'));
     setProducts([...ls]);
