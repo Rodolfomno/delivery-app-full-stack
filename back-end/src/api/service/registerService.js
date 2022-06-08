@@ -13,5 +13,5 @@ module.exports = async (user) => {
     role: 'customer',
   });
 
-  return newUser;
+  return newUser.dataValues;
 };

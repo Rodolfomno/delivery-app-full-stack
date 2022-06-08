@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { requestLogin } from '../../service/request';
+import { setToken, requestLogin, requestData } from '../../service/request';
 import ErrorMessage from '../../components/ErrorMessage';
 import './register.css';
 
-// test
-
 function Register() {
-  // const navigate = useNavigate();
   const NUMBER = 6;
   const LENGTH_NAME = 12;
 
@@ -29,13 +26,15 @@ function Register() {
   const registerInto = async (e) => {
     e.preventDefault();
     const endpoint = '/register';
+    const endpoint2 = '/products';
 
     try {
       const dataRegister = await requestLogin(endpoint, register);
-      console.log(dataRegister);
-
-      // localStorage.setItem('user', JSON.stringify({ token, ...user }));
-      localStorage.setItem('user', JSON.stringify(dataRegister));
+      const { name, email, role, token } = dataRegister;
+      setToken(token);
+      const data = await requestData(endpoint2);
+      localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
+      localStorage.setItem('products', JSON.stringify(data));
       setIsLogged(true);
     } catch (error) {
       console.log(error);
