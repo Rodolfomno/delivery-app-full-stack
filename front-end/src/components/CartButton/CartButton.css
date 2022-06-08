@@ -1,17 +1,20 @@
-.car-btn {
+.cart-btn {
   background-color: #036b52;
   border-radius: 10px;
   color: #e5e5e5;
   font-size: 1.8rem;
   font-weight: 700;
   height: 51.35px;
-  margin-left: 70%;
-  margin-top: 480px;
-  position: fixed;
+
+  /* margin-left: 70%; */
+
+  /* margin-top: 480px; */
+
+  /* position: fixed; */
   width: 289.25px;
 }
 
-.car-btn:hover {
+.cart-btn:hover {
   background-color: #039270;
   cursor: pointer;
   transition: 10;

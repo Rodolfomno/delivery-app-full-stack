@@ -1,18 +1,30 @@
-// import React from 'react';
-// import MyContext from './MyContext';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import MyContext from './MyContext';
 
-// function ProductsProvider({ children }) {
-//   const contextValue = {};
+function ProductsProvider({ children }) {
+  const [products, setProducts] = useState([]);
+  const [cartTotalValue, setCartTotalValue] = useState('R$ 0,00');
+  const [isDisabledButtonCart, setisDisabledButtonCart] = useState(true);
 
-//   return (
-//     <MyContext.Provider value={ contextValue }>
-//       { children }
-//     </MyContext.Provider>
-//   );
-// }
+  const contextValue = {
+    products,
+    setProducts,
+    cartTotalValue,
+    setCartTotalValue,
+    isDisabledButtonCart,
+    setisDisabledButtonCart,
+  };
 
-// ProductsProvider.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
+  return (
+    <MyContext.Provider value={ contextValue }>
+      { children }
+    </MyContext.Provider>
+  );
+}
 
-// export default ProductsProvider;
+ProductsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default ProductsProvider;

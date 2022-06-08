@@ -1,9 +1,16 @@
 .btn-rm-add {
-  align-items: center;
   border: solid 1px #001813;
-  column-gap: 15px;
   display: flex;
   height: 25.63px;
   justify-content: center;
   width: 76.23px;
+}
+
+.btn-rm-add input {
+  border: none;
+  text-align: center;
+}
+
+.btn-rm, .btn-add {
+  width: 100px;
 }

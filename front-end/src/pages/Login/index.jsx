@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { setToken, requestLogin, requestData } from '../../service/request';
+import { requestLogin, requestData, setToken } from '../../service/request';
 import ErrorMessage from '../../components/ErrorMessage';
 import './login.css';
 
