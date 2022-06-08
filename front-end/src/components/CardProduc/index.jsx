@@ -5,11 +5,13 @@ import './CardProduc.css';
 
 function CardProduct({ product }) {
   const { id, name, price, urlImage } = product;
+  const priceV = price.replace('.', ',');
+
   return (
     <div className="card">
       <div className="card-img-price">
         <span data-testid={ `customer_products__element-card-price-${id}` }>
-          { price }
+          { priceV }
         </span>
         <img
           src={ urlImage }
@@ -21,7 +23,7 @@ function CardProduct({ product }) {
         <span data-testid={ `customer_products__element-card-title-${id}` }>
           { name }
         </span>
-        <ButtonCardProduc id={ id } />
+        <ButtonCardProduc product={ product } />
       </div>
     </div>
   );
