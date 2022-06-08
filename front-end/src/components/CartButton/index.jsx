@@ -1,15 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './CarButton.css';
+import './CartButton.css';
 
-function CarButton() {
+function CartButton() {
   const navigate = useNavigate();
 
   return (
     <button
       data-testid="customer_products__button-cart"
-      className="car-btn"
+      className="cart-btn"
       type="button"
       onClick={ () => navigate('/customer/checkout') }
     >
@@ -18,4 +18,4 @@ function CarButton() {
   );
 }
 
-export default CarButton;
+export default CartButton;

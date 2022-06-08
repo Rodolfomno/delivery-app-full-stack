@@ -1,4 +1,4 @@
-.car-btn {
+.cart-btn {
   background-color: #036b52;
   border-radius: 10px;
   color: #e5e5e5;
@@ -11,7 +11,7 @@
   width: 289.25px;
 }
 
-.car-btn:hover {
+.cart-btn:hover {
   background-color: #039270;
   cursor: pointer;
   transition: 10;

@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import MyContext from '../../context/MyContext';
 import NavBar from '../../components/NavBar';
 import CardProduct from '../../components/CardProduc';
-import CarButton from '../../components/CarButton';
+import CartButton from '../../components/CartButton';
 import './Products.css';
 
 function Products() {
@@ -21,7 +21,7 @@ function Products() {
             <CardProduct key={ product.id } product={ product } />
           ))
         }
-        <CarButton />
+        <CartButton />
       </main>
     </>
   );
