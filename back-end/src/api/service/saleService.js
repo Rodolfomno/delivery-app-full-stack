@@ -22,16 +22,14 @@ const create = async (newSale, products) => {
 };
 
 const findAllSalesByUserId = async (userId) => {
-  try {
     const sales = await Sales.findAll({
       where: { userId },
       attributes: ['id', 'saleDate', 'totalPrice', 'status'],
     });
 
+    if (sales.length === 0) return { message: 'No orders found for this customer' };
+
     return sales;
-  } catch (err) {
-    return { message: 'No orders found for this customer' };
-  }
 };
 
 module.exports = { create, findAllSalesByUserId };
