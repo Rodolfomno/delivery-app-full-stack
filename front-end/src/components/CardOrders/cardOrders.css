@@ -1,0 +1,64 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 30px;
+  margin: 20px;
+  width: 600px;
+  height: 140px;
+  transition: all 0.3s ease-out;
+  color: black;
+  font-size: 16px;
+  background-color: #EAF1EF;
+}
+
+.request-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  flex-direction: column;
+  background-color: white;
+  width: 180px;
+  height: 115px;
+}
+
+.request-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 6px;
+  margin: 3px;
+  width: 180px;
+  height: 115px;
+  background-color: green;
+}
+
+.request-dateprice {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 146px;
+  height: 115px;
+}
+
+.card-dateprice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 6px;
+  margin: 3px;
+  width: 150px;
+  height: 80%;
+  transition: all 0.3s ease-out;
+  background-color: #EAF1EF;
+}
