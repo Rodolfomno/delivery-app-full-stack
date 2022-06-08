@@ -4,10 +4,13 @@ import MyContext from './MyContext';
 
 function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [cartTotalValue, setCartTotalValue] = useState(0);
 
   const contextValue = {
     products,
     setProducts,
+    cartTotalValue,
+    setCartTotalValue,
   };
 
   return (
