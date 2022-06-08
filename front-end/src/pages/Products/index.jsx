@@ -7,7 +7,6 @@ import './Products.css';
 
 function Products() {
   const { products, setProducts } = useContext(MyContext);
-  // const [products, setProducts] = useState([]);
   useEffect(() => {
     const ls = JSON.parse(localStorage.getItem('products'));
     setProducts([...ls]);

@@ -32,7 +32,6 @@ function Register() {
 
     try {
       const dataRegister = await requestLogin(endpoint, register);
-      console.log(dataRegister);
 
       // localStorage.setItem('user', JSON.stringify({ token, ...user }));
       localStorage.setItem('user', JSON.stringify(dataRegister));
