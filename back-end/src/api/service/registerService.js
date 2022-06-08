@@ -1,7 +1,7 @@
 const md5 = require('md5');
 const { Users } = require('../../database/models');
 
-const createUser = async (user) => {
+module.exports = async (user) => {
   const checkExists = await Users.findOne({ where: { email: user.email } });
   if (checkExists) return { message: 'User already exists' };
 
@@ -13,6 +13,5 @@ const createUser = async (user) => {
     role: 'customer',
   });
 
-  return newUser;
+  return newUser.dataValues;
 };
-module.exports = { createUser };
