@@ -8,6 +8,7 @@ function CarButton() {
 
   return (
     <button
+      data-testid="customer_products__button-cart"
       className="car-btn"
       type="button"
       onClick={ () => navigate('/customer/checkout') }
