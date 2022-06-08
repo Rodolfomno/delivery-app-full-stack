@@ -30,17 +30,11 @@ function Register() {
 
     try {
       const dataRegister = await requestLogin(endpoint, register);
-<<<<<<< HEAD
-
-      // localStorage.setItem('user', JSON.stringify({ token, ...user }));
-      localStorage.setItem('user', JSON.stringify(dataRegister));
-=======
       const { name, email, role, token } = dataRegister;
       setToken(token);
       const data = await requestData(endpoint2);
       localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
       localStorage.setItem('products', JSON.stringify(data));
->>>>>>> bb278e4aa2ed000553919fe291e3e0a7b6748b32
       setIsLogged(true);
     } catch (error) {
       console.log(error);
