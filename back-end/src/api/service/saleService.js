@@ -1,5 +1,10 @@
 const moment = require('moment');
-const { Sales, SalesProducts } = require('../../database/models');
+const { Sales, SalesProducts, Users } = require('../../database/models');
+
+const include = [
+  { model: Users, as: 'user', attributes: { exclude: ['password'] } },
+  { model: Users, as: 'seller', attributes: { exclude: ['password'] } },
+];
 
 const create = async (newSale, products) => {
   if (newSale.sellerId === newSale.userId) {
@@ -32,4 +37,14 @@ const findAllSalesByUserId = async (userId) => {
     return sales;
 };
 
-module.exports = { create, findAllSalesByUserId };
+const findSaleById = async (userId, saleId) => {
+  const sale = await Sales.findAll({ 
+    where: { id: saleId, userId },
+    include,
+    attributes: { exclude: ['userId', 'sellerId'] },
+  });
+  if (!sale) return { message: 'Sale not found' };
+  return sale;
+};
+
+module.exports = { create, findAllSalesByUserId, findSaleById };

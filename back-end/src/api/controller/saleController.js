@@ -32,4 +32,18 @@ const getAllSalesByUserId = async (req, res, next) => {
   }
 };
 
-module.exports = { checkoutSale, getAllSalesByUserId };
+const getSaleById = async (req, res, next) => {
+  const { id: saleId } = req.params;
+  const { id: userId } = req.user;
+  try {
+    const response = await saleService.findSaleById(userId, saleId);
+    if (response.message) return res.status(404).json(response);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+module.exports = { checkoutSale, getAllSalesByUserId, getSaleById };
