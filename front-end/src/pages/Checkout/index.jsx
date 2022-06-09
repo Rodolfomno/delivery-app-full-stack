@@ -13,7 +13,7 @@ function Checkout() {
         </section>
         <section className="delivery-container">
           <h2>Detalhes e Endereço de Entrega</h2>
-          {/* <CardDetailsAndAddress /> */}
+          <CardDetailsAndAddress />
         </section>
       </main>
     </>
