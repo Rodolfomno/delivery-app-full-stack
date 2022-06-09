@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import MyContext from '../../context/MyContext';
 
 function TableCheckout() {
   const [cartItems, setCartItems] = useState([]);
-  const [totalCheckoutValor, setTotalCheckoutValor] = useState(0);
+  const { totalCheckoutValor, setTotalCheckoutValor } = useContext(MyContext);
+  // const [totalCheckoutValor, setTotalCheckoutValor] = useState(0);
   // zebirita@email.com
   // $#zebirita#$
 
@@ -84,9 +86,7 @@ function TableCheckout() {
         </tr>
       ))}
       <div
-        data-testid={
-          `customer_checkout__element-order-table-total-total-price-${indice}`
-        }
+        data-testid="customer_checkout__element-order-table-total-total-price"
       >
         Total:
         { totalCheckoutValor }
