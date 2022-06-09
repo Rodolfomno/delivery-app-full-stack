@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import MyContext from '../../context/MyContext';
 import { requestCheckout, requestData } from '../../service/request';
 import './CardDetailsAndAddress.css';
@@ -8,7 +8,8 @@ function CardDetailsAndAddress() {
   const [sellers, setSellers] = useState([]);
 
   const { totalCheckoutValor } = useContext(MyContext);
-  const [clientDetails, setClientDetails] = useState({
+  const [salesDetails, setSalesDetails] = useState({
+    id: '',
     seller: '',
     address: '',
     number: '',
@@ -21,19 +22,22 @@ function CardDetailsAndAddress() {
   }, []);
 
   const handleInputChange = ({ target }) => {
-    const { name, value } = target;
-    setClientDetails({ ...clientDetails, [name]: value });
+    const { name, value, key } = target;
+    setSalesDetails({ ...salesDetails, [name]: value, id: key });
   };
 
   // post finaliza copra: /sale
   const onSubmitFinish = (e) => {
-    const endpoint = '/ckeckout';
+    const endpoint = '/sale';
     e.preventDefault();
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const requestBody = {
-      cart,
-      totalCheckoutValor,
-      ...clientDetails,
+      userId: cart.id,
+      sellerId: salesDetails.id,
+      totalPrice: totalCheckoutValor,
+      deliveryAddress: salesDetails.address,
+      deliveryNumber: salesDetails.number,
+      products: cart,
     };
 
     requestCheckout(endpoint, requestBody);
@@ -46,13 +50,14 @@ function CardDetailsAndAddress() {
           P.Vendedora Responsável:
           <select
             onChange={ handleInputChange }
-            value={ clientDetails.seller }
+            value={ salesDetails.seller }
+            key={ salesDetails.id }
             data-testid="customer_checkout__select-seller"
             name="seller"
             id="seller"
           >
-            { sellers.map((seller, index) => (
-              <option key={ index } value={ seller }>{ seller }</option>
+            { sellers.map((seller) => (
+              <option key={ seller.id } value={ seller }>{ seller }</option>
             )) }
           </select>
         </label>
@@ -63,7 +68,7 @@ function CardDetailsAndAddress() {
             onChange={ handleInputChange }
             data-testid="customer_checkout__input-address"
             type="text"
-            value={ clientDetails.address }
+            value={ salesDetails.address }
             name="address"
             id="address"
           />
@@ -76,7 +81,7 @@ function CardDetailsAndAddress() {
             data-testid="customer_checkout__input-addressNumber"
             type="text"
             inputMode="numeric"
-            value={ clientDetails.number }
+            value={ salesDetails.number }
             name="number"
             id="number"
           />
