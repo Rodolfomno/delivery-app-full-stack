@@ -19,7 +19,6 @@ function ButtonCardProduc({ product }) {
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     if (cart.length) {
-      console.log('soma', cart);
       const totalValue = cart.map((prod) => Number(prod.price) * prod.qtd)
         .reduce((acc, price) => acc + price, 0);
 

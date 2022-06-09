@@ -7,7 +7,8 @@ function CardOrders(props) {
   console.log(props);
   return (
     <section className="container-orders">
-      <div className="card">
+      <div className="card-container">
+
         <div className="request-number">
           <h3>Pedido</h3>
           <h2 data-testid={ `customer_orders__element-order-id-${id}` }>{ userD.id }</h2>

@@ -23,7 +23,7 @@ const saleSchema = Joi.object({
     'any.required': emptyField,
     'string.empty': emptyField,
   }),
-  deliveryNumber: Joi.number().required()
+  deliveryNumber: Joi.string().min(1).required()
 .messages({
     'any.required': emptyField,
     'number.empty': emptyField,
