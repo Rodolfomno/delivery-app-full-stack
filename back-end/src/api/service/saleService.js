@@ -13,9 +13,8 @@ const create = async (newSale, products) => {
 
   const { id: insertedId } = await Sales.create({ saleDate: moment(), ...newSale });
 
-  const insertSoldProducts = products.map(
-    async (product) => SalesProducts.create({ saleId: insertedId, ...product }),
-  );
+  const insertSoldProducts = products.map(async ({ id: productId, qtd: quantity }) => ( 
+    SalesProducts.create({ saleId: insertedId, productId, quantity })));
 
   try {
     await Promise.all(insertSoldProducts);
