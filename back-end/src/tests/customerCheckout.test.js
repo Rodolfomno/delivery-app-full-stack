@@ -8,10 +8,10 @@ const { Sales, SalesProducts } = require('../database/models');
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('Testes de integração para rota "/checkout"', () => {
+describe('Testes de integração para rota "/customer"', () => {
   describe('Testa requisição com método POST', () => {
     it('1 - Caso a requisição não submeta informações da entrega corretamente', async () => {
-      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+      chaiHttpResponse = await chai.request(app).post('/customer').send({
         "userId": 3,
         "sellerId": 2,
         "totalPrice": 100,
@@ -37,7 +37,7 @@ describe('Testes de integração para rota "/checkout"', () => {
       expect(chaiHttpResponse.body.message).to.be.equal('Incomplete address');
     })
     it('2 - Caso a requisição NÂO tenha o formato esperado', async () => {
-      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+      chaiHttpResponse = await chai.request(app).post('/customer').send({
         "userId": 3,
         "sellerId": "e",
         "totalPrice": 100,
@@ -63,7 +63,7 @@ describe('Testes de integração para rota "/checkout"', () => {
       expect(chaiHttpResponse.body.message).to.be.equal('"sellerId" must be a number');
     })
     it('3 - Caso o vendedor e cliente sejam iguais', async () => {
-      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+      chaiHttpResponse = await chai.request(app).post('/customer').send({
         "userId": 3,
         "sellerId": 3,
         "totalPrice": 100,
@@ -89,7 +89,7 @@ describe('Testes de integração para rota "/checkout"', () => {
       expect(chaiHttpResponse.body.message).to.be.equal('Seller and customer cannot be the same');
     })
     it('4 - Caso os produtos vendidos não estejam cadastrados', async () => {
-      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+      chaiHttpResponse = await chai.request(app).post('/customer').send({
         "userId": 3,
         "sellerId": 2,
         "totalPrice": 100,
@@ -119,7 +119,7 @@ describe('Testes de integração para rota "/checkout"', () => {
         sinon.stub(Sales, 'create').resolves({ id: 1 });
         sinon.stub(SalesProducts, 'create').resolves();
       })
-      chaiHttpResponse = await chai.request(app).post('/checkout').send({
+      chaiHttpResponse = await chai.request(app).post('/customer').send({
         "userId": 3,
         "sellerId": 2,
         "totalPrice": 100,
