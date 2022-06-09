@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
-import { requestData } from '../../service/request';
+import { requestData, setToken } from '../../service/request';
 import CardOrders from '../../components/CardOrders';
 import './order.css';
 
@@ -15,8 +15,9 @@ function Orders() {
 
   useEffect(async () => {
     // setDataUser({ ...JSON.parse(localStorage.getItem('user')) });
-    const { id } = JSON.parse(localStorage.getItem('user'));
+    const { id, token } = JSON.parse(localStorage.getItem('user'));
     const data = await cardInfo(id);
+    setToken(token);
     console.log(data);
     setDataUser([...data]);
   }, []);
@@ -26,7 +27,13 @@ function Orders() {
     <>
       <NavBar />
       <main>
-        {dataUser.map((user) => (<CardOrders userD={ user } key={ user.id } />))}
+        {dataUser
+          .map((user, index) => (
+            <CardOrders
+              index={ index }
+              userD={ user }
+              key={ user.id }
+            />))}
       </main>
     </>
   );
