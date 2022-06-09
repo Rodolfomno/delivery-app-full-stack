@@ -5,7 +5,6 @@ import './Checkout.css';
 
 import TableCheckout from '../../components/TableCheckout';
 
-
 function Checkout() {
   return (
     <>
