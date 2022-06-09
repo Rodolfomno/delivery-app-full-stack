@@ -1,7 +1,7 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' }).trim();
+const JWT_SECRET = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf-8' });
 
 const sign = (payload, duration = '1h') =>
   jwt.sign(payload, JWT_SECRET, {
