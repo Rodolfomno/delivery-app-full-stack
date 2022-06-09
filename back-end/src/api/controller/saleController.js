@@ -20,7 +20,7 @@ const checkoutSale = async (req, res, next) => {
 };
 
 const getAllSalesByUserId = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.user;
   try {
     const response = await saleService.findAllSalesByUserId(id);
     if (response.message) return res.status(404).json(response);
