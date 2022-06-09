@@ -9,6 +9,6 @@ const routes = Router();
 routes.use('/login', loginRouter);
 routes.use('/register', registerRouter);
 routes.use('/products', productRouter);
-routes.use('/checkout', saleRouter);
+routes.use('/customer', saleRouter);
 
 module.exports = routes;
