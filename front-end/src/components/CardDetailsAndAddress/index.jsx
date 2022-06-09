@@ -15,10 +15,13 @@ function CardDetailsAndAddress() {
     number: '',
   });
 
-  useEffect(async () => {
-    const endPoint = '/user/seller';
-    const dataSellers = await requestData(endPoint);
-    setSellers(dataSellers);
+  useEffect(() => {
+    (async () => {
+      const endPoint = '/user/seller';
+      const dataSellers = await requestData(endPoint);
+      setSellers(dataSellers);
+    }
+    )();
   }, []);
 
   const handleInputChange = ({ target }) => {

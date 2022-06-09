@@ -24,7 +24,7 @@ function TableCheckout() {
     localStorage.setItem('totalCart', JSON.stringify());
     setTotalCheckoutValor(total);
     setCartItems([...data] || []);
-  }, []);
+  }, [setTotalCheckoutValor]);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
@@ -33,7 +33,7 @@ function TableCheckout() {
     const total = data2.reduce((acc, product) => acc + (product.qtd * product.price), 0);
 
     setTotalCheckoutValor(formatCurrency(total));
-  }, [cartItems]);
+  }, [cartItems, setTotalCheckoutValor]);
 
   return (
     <table>
