@@ -5,8 +5,8 @@ const saleController = require('../controller/saleController');
 
 const saleRouter = Router();
 
-saleRouter.post('/', saleValidation, saleController.checkoutSale);
+saleRouter.post('/', authMiddleware, saleValidation, saleController.checkoutSale);
+saleRouter.get('/', authMiddleware, saleController.getAllSalesByUserId);
 saleRouter.get('/:id', authMiddleware, saleController.getSaleById);
-saleRouter.get('/orders/:id', saleController.getAllSalesByUserId);
 
 module.exports = saleRouter;
