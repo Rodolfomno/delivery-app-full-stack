@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import formatCurrency from '../../utils/formatCurrency';
 import MyContext from '../../context/MyContext';
 
 function TableCheckout() {
@@ -31,7 +32,7 @@ function TableCheckout() {
     const data2 = JSON.parse(localStorage.getItem('cart')) || [];
     const total = data2.reduce((acc, product) => acc + (product.qtd * product.price), 0);
 
-    setTotalCheckoutValor(total);
+    setTotalCheckoutValor(formatCurrency(total));
   }, [cartItems]);
 
   return (
@@ -61,7 +62,7 @@ function TableCheckout() {
           <td
             data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }
           >
-            { price }
+            { formatCurrency(price)}
           </td>
           <td
             data-testid={ `customer_checkout__element-order-table-quantity-${indice}` }
@@ -71,7 +72,7 @@ function TableCheckout() {
           <td
             data-testid={ `customer_checkout__element-order-table-total-price-${indice}` }
           >
-            { price * qtd }
+            { formatCurrency(price * qtd)}
           </td>
           <button
             data-testid={

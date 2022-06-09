@@ -6,7 +6,7 @@ function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [cartTotalValue, setCartTotalValue] = useState('R$ 0,00');
   const [isDisabledButtonCart, setisDisabledButtonCart] = useState(true);
-  const [totalCheckoutValor, setTotalCheckoutValor] = useState(0);
+  const [totalCheckoutValor, setTotalCheckoutValor] = useState('R$ 0,00');
 
   const contextValue = {
     products,
