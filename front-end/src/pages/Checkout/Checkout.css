@@ -1,0 +1,11 @@
+.orders-conteiner {
+  border: solid 1px purple;
+  height: 455px;
+  width: 100%;
+}
+
+.delivery-container {
+  border: solid 1px purple;
+  height: 252px;
+  width: 100%;
+}
