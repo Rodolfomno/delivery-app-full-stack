@@ -11,17 +11,19 @@ function TableCheckout() {
 
   function handleButton({ target }) {
     const { name } = target;
-    console.log('array antigo', cartItems);
     const newData = cartItems.filter((item) => Number(item.id) !== Number(name));
-    console.log('Novo Array', newData);
-    setCartItems([...newData]);
+    setCartItems(newData);
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }
 
   useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(cart);
+  }, []);
+  useEffect(() => {
     const data = JSON.parse(localStorage.getItem('cart')) || [];
     const total = data.reduce((acc, product) => acc + (product.qtd * product.price), 0);
-    localStorage.setItem('totalCart', JSON.stringify());
+    // localStorage.setItem('totalCart', JSON.stringify());
     setTotalCheckoutValor(total);
     setCartItems([...data] || []);
   }, [setTotalCheckoutValor]);
@@ -40,12 +42,12 @@ function TableCheckout() {
       <tr>
         <th>Item</th>
         <th>Descrição</th>
-        <th>Valor unitario</th>
-        <th>Descrição</th>
+        <th>Quantidade</th>
+        <th>Valor Unitário</th>
         <th>Sub-total</th>
-        <th>Remover item</th>
+        <th>Remover Item</th>
       </tr>
-      { cartItems && cartItems.map(({ name, price, qtd, id }, indice) => (
+      { cartItems.map(({ name, price, qtd, id }, indice) => (
         <tr key={ id }>
           <td
             data-testid={
@@ -60,34 +62,37 @@ function TableCheckout() {
             { name }
           </td>
           <td
-            data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }
-          >
-            { formatCurrency(price)}
-          </td>
-          <td
             data-testid={ `customer_checkout__element-order-table-quantity-${indice}` }
           >
             { qtd }
           </td>
           <td
-            data-testid={ `customer_checkout__element-order-table-total-price-${indice}` }
+            data-testid={ `customer_checkout__element-order-table-unit-price-${indice}` }
+          >
+            { formatCurrency(price)}
+          </td>
+          <td
+            data-testid={ `customer_checkout__element-order-table-sub-total-${indice}` }
           >
             { formatCurrency(price * qtd)}
           </td>
-          <button
-            data-testid={
-              `customer_checkout__element-order-table-total-remove-${indice}`
-            }
-            type="button"
-            name={ id }
-            onClick={ handleButton }
-          >
-            Remover
-          </button>
+          <td>
+            <button
+              data-testid={
+                `customer_checkout__element-order-table-remove-${indice}`
+              }
+              type="button"
+              name={ id }
+              onClick={ handleButton }
+            >
+              Remover
+            </button>
+          </td>
+
         </tr>
       ))}
       <div
-        data-testid="customer_checkout__element-order-table-total-total-price"
+        data-testid="customer_checkout__element-order-total-price"
       >
         Total:
         { totalCheckoutValor }

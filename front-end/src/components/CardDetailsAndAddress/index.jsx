@@ -1,16 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
-import { requestCheckout, requestData } from '../../service/request';
-import './CardDetailsAndAddress.css';
+import { requestCheckout, requestData, setToken } from '../../service/request';
+// import './CardDetailsAndAddress.css';
 
 function CardDetailsAndAddress() {
-  // const mockeSeller = ['Iago', 'Lary', 'Luciano', 'Rodolfo', 'Walace'];
-  const [sellers, setSellers] = useState([]);
+  const navigate = useNavigate();
 
+  const [sellers, setSellers] = useState([]);
   const { totalCheckoutValor } = useContext(MyContext);
   const [salesDetails, setSalesDetails] = useState({
-    id: '',
-    seller: '',
+    idSeller: 0,
     address: '',
     number: '',
   });
@@ -19,32 +19,39 @@ function CardDetailsAndAddress() {
     (async () => {
       const endPoint = '/user/seller';
       const dataSellers = await requestData(endPoint);
-      setSellers(dataSellers);
+      console.log('seller', dataSellers);
+      setSellers([...dataSellers]);
     }
     )();
   }, []);
 
   const handleInputChange = ({ target }) => {
-    const { name, value, key } = target;
-    setSalesDetails({ ...salesDetails, [name]: value, id: key });
+    const { name, value } = target;
+    console.log(name, value);
+    setSalesDetails({ ...salesDetails, [name]: value });
   };
 
-  // post finaliza copra: /sale
-  const onSubmitFinish = (e) => {
-    const endpoint = '/sale';
+  const onSubmitFinish = async (e) => {
     e.preventDefault();
+    const endpoint = '/sale';
+    const total = totalCheckoutValor.slice(2).replace(',', '.');
+    console.log('slice', total);
+    const { token, id } = JSON.parse(localStorage.getItem('user')) || [];
+    console.log('usuario', id);
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const requestBody = {
-      userId: cart.id,
-      sellerId: salesDetails.id,
-      totalPrice: totalCheckoutValor,
+      userId: id,
+      sellerId: +salesDetails.idSeller,
+      totalPrice: +total,
       deliveryAddress: salesDetails.address,
       deliveryNumber: salesDetails.number,
       products: cart,
     };
-
-    requestCheckout(endpoint, requestBody);
+    console.log('body', requestBody);
+    setToken(token);
+    const { saleId } = await requestCheckout(endpoint, requestBody);
     localStorage.setItem('finish', totalCheckoutValor);
+    navigate(`/customer/orders/${saleId}`);
   };
   return (
     <form onSubmit={ (e) => onSubmitFinish(e) } className="form-container">
@@ -52,15 +59,22 @@ function CardDetailsAndAddress() {
         <label htmlFor="seller">
           P.Vendedora Responsável:
           <select
-            onChange={ handleInputChange }
-            value={ salesDetails.seller }
-            key={ salesDetails.id }
             data-testid="customer_checkout__select-seller"
-            name="seller"
+            onChange={ handleInputChange }
+            value={ salesDetails.idSeller }
+            key={ salesDetails.id }
+            name="idSeller"
             id="seller"
           >
+            <option>Vendedor</option>
             { sellers.map((seller) => (
-              <option key={ seller.id } value={ seller }>{ seller }</option>
+              <option
+                value={ seller.id }
+                key={ seller.id }
+              >
+                { seller.name }
+
+              </option>
             )) }
           </select>
         </label>
@@ -68,8 +82,8 @@ function CardDetailsAndAddress() {
         <label htmlFor="address">
           Endereço:
           <input
-            onChange={ handleInputChange }
             data-testid="customer_checkout__input-address"
+            onChange={ handleInputChange }
             type="text"
             value={ salesDetails.address }
             name="address"
@@ -80,8 +94,8 @@ function CardDetailsAndAddress() {
         <label htmlFor="number">
           Número:
           <input
-            onChange={ handleInputChange }
             data-testid="customer_checkout__input-addressNumber"
+            onChange={ handleInputChange }
             type="text"
             inputMode="numeric"
             value={ salesDetails.number }
