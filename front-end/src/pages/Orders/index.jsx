@@ -13,13 +13,15 @@ function Orders() {
     return data;
   };
 
-  useEffect(async () => {
-    // setDataUser({ ...JSON.parse(localStorage.getItem('user')) });
-    const { id, token } = JSON.parse(localStorage.getItem('user'));
-    const data = await cardInfo(id);
-    setToken(token);
-    console.log(data);
-    setDataUser([...data]);
+  useEffect(() => {
+    (async () => {
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      console.log(token);
+      setToken(token);
+      const data = await cardInfo();
+      console.log(data);
+      setDataUser([...data]);
+    })();
   }, []);
   // console.log(setDataUser);
 
