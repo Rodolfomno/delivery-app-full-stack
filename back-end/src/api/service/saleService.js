@@ -40,12 +40,21 @@ const findAllSalesByUserIdOrSaleId = async (id, role) => {
   return sales;
 };
 
-const findSaleById = async (userId, saleId) => {
-  const sale = await Sales.findAll({ 
-    where: { id: saleId, userId },
-    include: { all: true, attributes: { exclude: ['password'] } },
-    attributes: { exclude: ['userId', 'sellerId'] },
-  });
+const findSaleById = async (id, saleId, role) => {
+  let sale;
+  const include = { all: true, attributes: { exclude: ['password'] } };
+  const attributes = { exclude: ['userId', 'sellerId'] };
+  switch (role) {
+    case 'customer':
+      sale = await Sales.findAll({ where: { userId: id, id: saleId }, include, attributes });
+      break;
+    case 'seller':
+      sale = await Sales.findAll({ where: { sellerId: id, id: saleId }, include, attributes });
+      break;
+    default:
+      sale = [];
+      break;
+  }
   if (!sale) return { message: 'Sale not found' };
   return sale;
 };
