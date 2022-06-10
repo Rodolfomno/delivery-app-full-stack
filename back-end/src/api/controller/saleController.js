@@ -46,4 +46,17 @@ const getSaleById = async (req, res, next) => {
   }
 };
 
-module.exports = { checkoutSale, getAllSalesByUserIdOrSellerId, getSaleById };
+const updateStatus = async (req, res, next) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    await saleService.updateStatus(id, status);
+    return res.status(200).json({ message: 'Status atualizado' });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+module.exports = { checkoutSale, getAllSalesByUserIdOrSellerId, getSaleById, updateStatus };

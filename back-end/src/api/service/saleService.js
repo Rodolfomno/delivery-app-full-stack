@@ -59,4 +59,8 @@ const findSaleById = async (id, saleId, role) => {
   return sale;
 };
 
-module.exports = { create, findAllSalesByUserIdOrSaleId, findSaleById };
+const updateStatus = async (id, status) => {
+  await Sales.update({ status }, { where: { id } });
+};
+
+module.exports = { create, findAllSalesByUserIdOrSaleId, findSaleById, updateStatus };
