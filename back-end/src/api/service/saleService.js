@@ -1,10 +1,5 @@
 const moment = require('moment');
-const { Sales, SalesProducts, Users } = require('../../database/models');
-
-const include = [
-  { model: Users, as: 'user', attributes: { exclude: ['password'] } },
-  { model: Users, as: 'seller', attributes: { exclude: ['password'] } },
-];
+const { Sales, SalesProducts } = require('../../database/models');
 
 const create = async (newSale, products) => {
   if (newSale.sellerId === newSale.userId) {
@@ -25,25 +20,47 @@ const create = async (newSale, products) => {
   return insertedId;
 };
 
-const findAllSalesByUserId = async (userId) => {
-    const sales = await Sales.findAll({
-      where: { userId },
-      attributes: ['id', 'saleDate', 'totalPrice', 'status'],
-    });
+const findAllSalesByUserIdOrSaleId = async (id, role) => {
+  let sales;
+  const attributes = ['id', 'saleDate', 'totalPrice', 'status'];
+  switch (role) {
+    case 'customer':
+      sales = await Sales.findAll({ where: { userId: id }, attributes });
+      break;
+    case 'seller':
+      sales = await Sales.findAll({ where: { sellerId: id }, attributes });
+      break;
+    default:
+      sales = [];
+      break;
+  }
 
-    if (sales.length === 0) return { message: 'No orders found for this customer' };
+  if (sales.length === 0) return { message: 'No orders found for this customer' };
 
-    return sales;
+  return sales;
 };
 
-const findSaleById = async (userId, saleId) => {
-  const sale = await Sales.findAll({ 
-    where: { id: saleId, userId },
-    include,
-    attributes: { exclude: ['userId', 'sellerId'] },
-  });
+const findSaleById = async (id, saleId, role) => {
+  let sale;
+  const include = { all: true, attributes: { exclude: ['password'] } };
+  const attributes = { exclude: ['userId', 'sellerId'] };
+  switch (role) {
+    case 'customer':
+      sale = await Sales.findAll({ where: { userId: id, id: saleId }, include, attributes });
+      break;
+    case 'seller':
+      sale = await Sales.findAll({ where: { sellerId: id, id: saleId }, include, attributes });
+      break;
+    default:
+      sale = [];
+      break;
+  }
   if (!sale) return { message: 'Sale not found' };
   return sale;
 };
 
-module.exports = { create, findAllSalesByUserId, findSaleById };
+const updateStatus = async (id, status) => {
+  await Sales.update({ status }, { where: { id } });
+};
+
+module.exports = { create, findAllSalesByUserIdOrSaleId, findSaleById, updateStatus };

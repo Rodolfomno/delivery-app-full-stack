@@ -7,18 +7,27 @@
   width: 100%;
 }
 
+.inputs-form {
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+
+}
+
 .form-container label {
-  border: solid 1px red;
   display: flex;
   flex-direction: column;
 }
 
 .form-container label:nth-child( 2 ) {
-  border: solid 1px blue;
-  display: flex;
-  flex-direction: column;
+  width: 50%;
 }
 
 .form-container input, select {
   border: solid black 1px;
+}
+
+.form-container button {
+  background-color: #036b52;
+  margin-top: 50px;
 }

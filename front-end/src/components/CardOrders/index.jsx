@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './cardOrders.css';
+// import './cardOrders.css';
 
 function CardOrders(props) {
   const { userD, index } = props;

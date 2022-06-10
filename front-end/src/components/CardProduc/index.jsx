@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ButtonCardProduc from '../ButtonCardProduct';
-import './CardProduc.css';
+// import './CardProduc.css';
 
 function CardProduct({ product }) {
   const { id, name, price, urlImage } = product;

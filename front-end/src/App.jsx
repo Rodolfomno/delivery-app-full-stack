@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Checkout from './pages/Checkout';
+import DetailsOrder from './pages/DetailsOrder';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/customer/products" element={ <Products /> } />
       <Route path="/customer/orders" element={ <Orders /> } />
       <Route path="/customer/checkout" element={ <Checkout /> } />
+      <Route path="/customer/orders/:id" element={ <DetailsOrder /> } />
       <Route expec path="/" element={ <Navigate to="/login" /> } />
     </Routes>
   );

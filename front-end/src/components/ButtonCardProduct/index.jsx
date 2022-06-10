@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import MyContext from '../../context/MyContext';
 import formatCurrency from '../../utils/formatCurrency';
-import './ButtonCardProduct.css';
+// import './ButtonCardProduct.css';
 
 function ButtonCardProduc({ product }) {
   const { id } = product;
