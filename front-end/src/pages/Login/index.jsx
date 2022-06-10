@@ -45,6 +45,12 @@ function Login() {
   const handleRegister = () => {
     navigate('/register');
   };
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('user'))) {
+      setIsLogged(true);
+    }
+  }, []);
   useEffect(() => {
     function validateEmail(email) {
       const re = /\S+@\S+\.\S+/;

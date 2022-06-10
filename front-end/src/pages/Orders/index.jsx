@@ -32,7 +32,7 @@ function Orders() {
         {dataUser
           .map((user, index) => (
             <CardOrders
-              index={ index }
+              index={ index + 1 }
               userD={ user }
               key={ user.id }
             />))}
