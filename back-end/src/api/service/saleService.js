@@ -20,15 +20,24 @@ const create = async (newSale, products) => {
   return insertedId;
 };
 
-const findAllSalesByUserId = async (userId) => {
-    const sales = await Sales.findAll({
-      where: { userId },
-      attributes: ['id', 'saleDate', 'totalPrice', 'status'],
-    });
+const findAllSalesByUserIdOrSaleId = async (id, role) => {
+  let sales;
+  const attributes = ['id', 'saleDate', 'totalPrice', 'status'];
+  switch (role) {
+    case 'customer':
+      sales = await Sales.findAll({ where: { userId: id }, attributes });
+      break;
+    case 'seller':
+      sales = await Sales.findAll({ where: { sellerId: id }, attributes });
+      break;
+    default:
+      sales = [];
+      break;
+  }
 
-    if (sales.length === 0) return { message: 'No orders found for this customer' };
+  if (sales.length === 0) return { message: 'No orders found for this customer' };
 
-    return sales;
+  return sales;
 };
 
 const findSaleById = async (userId, saleId) => {
@@ -41,4 +50,4 @@ const findSaleById = async (userId, saleId) => {
   return sale;
 };
 
-module.exports = { create, findAllSalesByUserId, findSaleById };
+module.exports = { create, findAllSalesByUserIdOrSaleId, findSaleById };

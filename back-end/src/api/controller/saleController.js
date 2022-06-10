@@ -19,10 +19,10 @@ const checkoutSale = async (req, res, next) => {
   }
 };
 
-const getAllSalesByUserId = async (req, res, next) => {
-  const { id } = req.user;
+const getAllSalesByUserIdOrSellerId = async (req, res, next) => {
+  const { id, role } = req.user;
   try {
-    const response = await saleService.findAllSalesByUserId(id);
+    const response = await saleService.findAllSalesByUserIdOrSaleId(id, role);
     if (response.message) return res.status(404).json(response);
 
     return res.status(200).json(response);
@@ -46,4 +46,4 @@ const getSaleById = async (req, res, next) => {
   }
 };
 
-module.exports = { checkoutSale, getAllSalesByUserId, getSaleById };
+module.exports = { checkoutSale, getAllSalesByUserIdOrSellerId, getSaleById };
