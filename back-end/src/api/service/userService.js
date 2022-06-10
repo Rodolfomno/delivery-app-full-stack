@@ -1,9 +1,8 @@
 const { Users } = require('../../database/models');
 
 const getAllSeller = async () => {
-  const data = await Users.findOne({ where: { role: 'seller' }, attributes: ['id', 'name'] });
-  if (!data) return false;
-  const seller = data.dataValues;
+  const seller = await Users.findAll({ where: { role: 'seller' }, attributes: ['id', 'name'] });
+  if (!seller) return false;
 
   return seller;
 };

@@ -28,10 +28,10 @@ function Login() {
     const endpoint2 = '/products';
     try {
       const dataLogin = await requestLogin(endpoint1, login);
-      const { name, email, role, token } = dataLogin;
+      const { id, name, email, role, token } = dataLogin;
+      localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
       setToken(token);
       const data = await requestData(endpoint2);
-      localStorage.setItem('user', JSON.stringify({ name, email, role, token }));
       localStorage.setItem('products', JSON.stringify(data));
       setIsLogged(true);
     } catch (error) {

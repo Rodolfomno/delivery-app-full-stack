@@ -1,21 +1,80 @@
-import React from 'react';
-import './CardDetailsAndAddress.css';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MyContext from '../../context/MyContext';
+import { requestCheckout, requestData, setToken } from '../../service/request';
+// import './CardDetailsAndAddress.css';
 
 function CardDetailsAndAddress() {
-  const mockeSeller = ['Iago', 'Lary', 'Luciano', 'Rodolfo', 'Walace'];
+  const navigate = useNavigate();
 
+  const [sellers, setSellers] = useState([]);
+  const { totalCheckoutValor } = useContext(MyContext);
+  const [salesDetails, setSalesDetails] = useState({
+    idSeller: 0,
+    address: '',
+    number: '',
+  });
+
+  useEffect(() => {
+    (async () => {
+      const endPoint = '/user/seller';
+      const dataSellers = await requestData(endPoint);
+      console.log('seller', dataSellers);
+      setSellers([...dataSellers]);
+    }
+    )();
+  }, []);
+
+  const handleInputChange = ({ target }) => {
+    const { name, value } = target;
+    console.log(name, value);
+    setSalesDetails({ ...salesDetails, [name]: value });
+  };
+
+  const onSubmitFinish = async (e) => {
+    e.preventDefault();
+    const endpoint = '/sale';
+    const total = totalCheckoutValor.slice(2).replace(',', '.');
+    console.log('slice', total);
+    const { token, id } = JSON.parse(localStorage.getItem('user')) || [];
+    console.log('usuario', id);
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const requestBody = {
+      userId: id,
+      sellerId: +salesDetails.idSeller,
+      totalPrice: +total,
+      deliveryAddress: salesDetails.address,
+      deliveryNumber: salesDetails.number,
+      products: cart,
+    };
+    console.log('body', requestBody);
+    setToken(token);
+    const { saleId } = await requestCheckout(endpoint, requestBody);
+    localStorage.setItem('finish', totalCheckoutValor);
+    navigate(`/customer/orders/${saleId}`);
+  };
   return (
-    <form className="form-container">
+    <form onSubmit={ (e) => onSubmitFinish(e) } className="form-container">
       <div className="inputs-form">
         <label htmlFor="seller">
           P.Vendedora Responsável:
           <select
             data-testid="customer_checkout__select-seller"
-            name="seller"
+            onChange={ handleInputChange }
+            value={ salesDetails.idSeller }
+            key={ salesDetails.id }
+            name="idSeller"
             id="seller"
           >
-            { mockeSeller.map((seller, index) => (
-              <option key={ index } value={ seller }>{ seller }</option>
+            <option>Vendedor</option>
+            { sellers.map((seller) => (
+              <option
+                value={ seller.id }
+                key={ seller.id }
+              >
+                { seller.name }
+
+              </option>
             )) }
           </select>
         </label>
@@ -24,7 +83,9 @@ function CardDetailsAndAddress() {
           Endereço:
           <input
             data-testid="customer_checkout__input-address"
+            onChange={ handleInputChange }
             type="text"
+            value={ salesDetails.address }
             name="address"
             id="address"
           />
@@ -34,8 +95,10 @@ function CardDetailsAndAddress() {
           Número:
           <input
             data-testid="customer_checkout__input-addressNumber"
+            onChange={ handleInputChange }
             type="text"
             inputMode="numeric"
+            value={ salesDetails.number }
             name="number"
             id="number"
           />
