@@ -1,8 +1,13 @@
 import React from 'react';
+import NavBar from '../../components/NavBar';
 
 function DetailsOrder() {
   return (
-    <h1>Detalhes do Pedifo</h1>
+    <>
+      <NavBar />
+      <h1>Detalhes do Pedifo</h1>
+    </>
+
   );
 }
 
