@@ -29,9 +29,9 @@ function Login() {
     try {
       const dataLogin = await requestLogin(endpoint1, login);
       const { id, name, email, role, token } = dataLogin;
+      localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
       setToken(token);
       const data = await requestData(endpoint2);
-      localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
       localStorage.setItem('products', JSON.stringify(data));
       setIsLogged(true);
     } catch (error) {
