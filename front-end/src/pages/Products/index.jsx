@@ -20,8 +20,8 @@ function Products() {
             <CardProduct key={ product.id } product={ product } />
           ))
         }
-        <CartButton />
       </main>
+      <CartButton />
     </>
   );
 }
