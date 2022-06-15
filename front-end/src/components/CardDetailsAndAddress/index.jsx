@@ -35,9 +35,7 @@ function CardDetailsAndAddress() {
     e.preventDefault();
     const endpoint = '/sale';
     const total = totalCheckoutValor.slice(2).replace(',', '.');
-    console.log('slice', total);
     const { token, id } = JSON.parse(localStorage.getItem('user')) || [];
-    console.log('usuario', id);
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const requestBody = {
       userId: id,
@@ -47,7 +45,6 @@ function CardDetailsAndAddress() {
       deliveryNumber: salesDetails.number,
       products: cart,
     };
-    console.log('body', requestBody);
     setToken(token);
     const { saleId } = await requestCheckout(endpoint, requestBody);
     localStorage.setItem('finish', totalCheckoutValor);
