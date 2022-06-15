@@ -6,6 +6,8 @@ import Products from './pages/Products';
 import Orders from './pages/Orders';
 import Checkout from './pages/Checkout';
 import DetailsOrder from './pages/DetailsOrder';
+import OrdersSeller from './pages/OdersSeller';
+import DetailsOrderSeller from './pages/DetailsOrderSeller';
 import './App.css';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       <Route path="/customer/orders" element={ <Orders /> } />
       <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/customer/orders/:id" element={ <DetailsOrder /> } />
+      <Route path="/seller/orders" element={ <OrdersSeller /> } />
+      <Route path="/seller/orders/:id" element={ <DetailsOrderSeller /> } />
       <Route expec path="/" element={ <Navigate to="/login" /> } />
     </Routes>
   );
