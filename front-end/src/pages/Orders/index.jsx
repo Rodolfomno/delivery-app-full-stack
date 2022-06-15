@@ -6,20 +6,20 @@ import './order.css';
 
 function Orders() {
   const [dataUser, setDataUser] = useState([]);
+
   const cardInfo = async () => {
     const endpoint = '/sale';
     const data = await requestData(endpoint);
-    console.log(data);
     return data;
   };
 
   useEffect(() => {
     (async () => {
       const { token } = JSON.parse(localStorage.getItem('user'));
-      console.log(token);
+      console.log('Token', token);
       setToken(token);
       const data = await cardInfo();
-      console.log(data);
+      console.log('Sale', data);
       setDataUser([...data]);
     })();
   }, []);
