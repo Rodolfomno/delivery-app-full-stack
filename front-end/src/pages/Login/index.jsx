@@ -16,6 +16,10 @@ function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [typeUser, setTypeUser] = useState({
+    role: '',
+    page: '',
+  });
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -28,11 +32,19 @@ function Login() {
     const endpoint2 = '/products';
     try {
       const dataLogin = await requestLogin(endpoint1, login);
+      console.log('Login', dataLogin);
       const { id, name, email, role, token } = dataLogin;
       localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
       setToken(token);
       const data = await requestData(endpoint2);
       localStorage.setItem('products', JSON.stringify(data));
+
+      if (role === 'customer') {
+        setTypeUser({ role, page: 'products' });
+      } else {
+        setTypeUser({ role, page: 'orders' });
+      }
+
       setIsLogged(true);
     } catch (error) {
       console.log('ERRO:', error);
@@ -58,7 +70,7 @@ function Login() {
     }
   }, [login]);
 
-  if (isLogged) return <Navigate to="/customer/products" />;
+  if (isLogged) return <Navigate to={ `/${typeUser.role}/${typeUser.page}` } />;
 
   return (
     <div>
