@@ -32,7 +32,6 @@ function Login() {
     const endpoint2 = '/products';
     try {
       const dataLogin = await requestLogin(endpoint1, login);
-      console.log('Login', dataLogin);
       const { id, name, email, role, token } = dataLogin;
       localStorage.setItem('user', JSON.stringify({ id, name, email, role, token }));
       setToken(token);
@@ -40,8 +39,10 @@ function Login() {
       localStorage.setItem('products', JSON.stringify(data));
 
       if (role === 'customer') {
+        localStorage.setItem('typeUser', JSON.stringify({ role, page: 'products' }));
         setTypeUser({ role, page: 'products' });
       } else {
+        localStorage.setItem('typeUser', JSON.stringify({ role, page: 'orders' }));
         setTypeUser({ role, page: 'orders' });
       }
 
@@ -60,6 +61,8 @@ function Login() {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('user'))) {
+      const { role, page } = JSON.parse(localStorage.getItem('typeUser'));
+      setTypeUser({ role, page });
       setIsLogged(true);
     }
   }, []);
