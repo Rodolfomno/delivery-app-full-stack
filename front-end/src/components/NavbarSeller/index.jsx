@@ -22,7 +22,7 @@ function NavbarSeller() {
         <button
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
-          onClick={ () => navigate('/customer/orders') }
+          onClick={ () => navigate('/seller/orders') }
         >
           PEDIDOS
         </button>
