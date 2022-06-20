@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+//  import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import formatCurrency from '../../utils/formatCurrency';
 
 const dataTest = 'customer_order_details__element-order-details-label-delivery-status';
 
 function DetailsOrder() {
-  const { id } = useParams();
+  //  const { id } = useParams();
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
-  const [isDelivered, setIsDelivered] = useState(false);
+  //  const [isDelivered, setIsDelivered] = useState(false);
 
   const mockDetails = {
     id: '003',
