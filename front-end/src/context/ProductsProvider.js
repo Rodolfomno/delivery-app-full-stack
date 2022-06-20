@@ -7,6 +7,7 @@ function ProductsProvider({ children }) {
   const [cartTotalValue, setCartTotalValue] = useState('R$ 0,00');
   const [isDisabledButtonCart, setisDisabledButtonCart] = useState(true);
   const [totalCheckoutValor, setTotalCheckoutValor] = useState('R$ 0,00');
+  const [orderDetails, setOrderDetails] = useState(null);
 
   const contextValue = {
     products,
@@ -17,6 +18,8 @@ function ProductsProvider({ children }) {
     setisDisabledButtonCart,
     totalCheckoutValor,
     setTotalCheckoutValor,
+    orderDetails,
+    setOrderDetails,
   };
 
   return (

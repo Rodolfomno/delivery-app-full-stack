@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 // import './cardOrders.css';
 
 function CardOrdersSeller(props) {
@@ -39,7 +40,7 @@ function CardOrdersSeller(props) {
             data-testid={ `seller_orders__element-order-date-${order.id}` }
             className="card-dateprice"
           >
-            { order.saleDate }
+            {moment(order.saleDate).format('DD/MM/YYYY')}
           </span>
           <br />
           <span
@@ -52,7 +53,7 @@ function CardOrdersSeller(props) {
           <span
             data-testid={ `seller_orders__element-card-address-${order.id}` }
           >
-            Rua tal, Bairro X numero 888
+            { `${order.deliveryAddress} ${order.deliveryNumber}` }
           </span>
         </div>
       </button>
@@ -66,6 +67,8 @@ CardOrdersSeller.propTypes = {
     saleDate: PropTypes.string,
     status: PropTypes.string,
     totalPrice: PropTypes.string,
+    deliveryAddress: PropTypes.string,
+    deliveryNumber: PropTypes.string,
   }).isRequired,
 };
 

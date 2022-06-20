@@ -23,4 +23,9 @@ export const requestCheckout = async (endpoint, body) => {
   return data;
 };
 
+export const requestStatus = async (endpoint, body) => {
+  const { data } = await api.patch(endpoint, body);
+  return data;
+};
+
 export default api;

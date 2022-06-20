@@ -13,7 +13,7 @@ function NavbarSeller() {
 
   const logOut = () => {
     navigate('/login');
-    // localStorage.clear();
+    localStorage.clear();
   };
 
   return (
