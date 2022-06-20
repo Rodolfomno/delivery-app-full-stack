@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 // import './cardOrders.css';
 
 function CardOrdersSeller(props) {
@@ -39,7 +40,7 @@ function CardOrdersSeller(props) {
             data-testid={ `seller_orders__element-order-date-${order.id}` }
             className="card-dateprice"
           >
-            { order.saleDate }
+            {moment(order.saleDate).format('DD/MM/YYYY')}
           </span>
           <br />
           <span

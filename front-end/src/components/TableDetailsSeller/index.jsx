@@ -3,37 +3,27 @@ import moment from 'moment';
 import MyContext from '../../context/MyContext';
 import formatCurrency from '../../utils/formatCurrency';
 
-function TableDetailsCustomer() {
-  const dataTest = 'customer_order_details__element-order-details-label-delivery-status';
+function TableDetailsSeller() {
+  const dataTest = 'seller_order_details__element-order-details-label-delivery-status';
+  const { orderDetails: order } = useContext(MyContext);
+  console.log('TableSeller', order);
 
-  // const [isDisebled, setIsDisebled] = useState(true);
   function handleButton() {
     console.log('marca como entregue no banco');
   }
-
-  const { orderDetails: order } = useContext(MyContext);
-  console.log('compoenten', order);
   return (
     <>
-
       <table border="1">
         <tr>
           <td
-            data-testid="customer_order_details__element-order-details-label-order-id"
+            data-testid="seller_order_details__element-order-details-label-order-id"
           >
             pedido
             {' '}
             { order.id }
           </td>
           <td
-            data-testid="customer_order_details__element-order-details-label-seller-name"
-          >
-            P. vend:
-            {' '}
-            { order.seller.name }
-          </td>
-          <td
-            data-testid="customer_order_details__element-order-details-label-order-date"
+            data-testid="seller_order_details__element-order-details-label-order-date"
           >
             { moment(order.saleDate).format('DD/MM/YYYY') }
           </td>
@@ -44,13 +34,21 @@ function TableDetailsCustomer() {
 
           </td>
           <button
-            data-testid="customer_order_details__button-delivery-check"
+            data-testid="seller_order_details__button-preparing-check"
+            type="button"
+            name="marcarButton"
+            onClick={ handleButton }
+          >
+            Preparar Pedido
+          </button>
+          <button
+            data-testid="seller_order_details__button-dispatch-check"
             type="button"
             name="marcarButton"
             onClick={ handleButton }
             disabled="true"
           >
-            Marcar como entregue
+            Saiu para entrega
           </button>
         </tr>
         <tr>
@@ -64,14 +62,14 @@ function TableDetailsCustomer() {
           <tr key={ index }>
             <td
               data-testid={
-                `customer_order_details__element-order-table-item-number-${index}`
+                `seller_order_details__element-order-table-item-number-${index}`
               }
             >
               { id }
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-name-${index}`
+                `seller_order_details__element-order-table-name-${index}`
               }
             >
               { name }
@@ -79,21 +77,21 @@ function TableDetailsCustomer() {
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-quantity-${index}`
+                `seller_order_details__element-order-table-quantity-${index}`
               }
             >
               { SalesProducts.quantity }
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-table-sub-total-${index}`
+                `seller_order_details__element-order-table-sub-total-${index}`
               }
             >
               { formatCurrency(price) }
             </td>
             <td
               data-testid={
-                `customer_order_details__element-order-total-price-${index}`
+                `seller_order_details__element-order-total-price-${index}`
               }
             >
               { formatCurrency(SalesProducts.quantity * price) }
@@ -102,7 +100,7 @@ function TableDetailsCustomer() {
         )) }
       </table>
       <h2
-        data-testid="customer_order_details__element-order-total-price"
+        data-testid="seller_order_details__element-order-total-price"
       >
         { formatCurrency(order.totalPrice) }
       </h2>
@@ -110,4 +108,4 @@ function TableDetailsCustomer() {
   );
 }
 
-export default TableDetailsCustomer;
+export default TableDetailsSeller;
