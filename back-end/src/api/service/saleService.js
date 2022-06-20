@@ -22,7 +22,9 @@ const create = async (newSale, products) => {
 
 const findAllSalesByUserIdOrSaleId = async (id, role) => {
   let sales;
-  const attributes = ['id', 'saleDate', 'totalPrice', 'status'];
+  const attributes = [
+    'id', 'saleDate', 'totalPrice', 'status', 'deliveryAddress', 'deliveryNumber',
+  ];
   switch (role) {
     case 'customer':
       sales = await Sales.findAll({ where: { userId: id }, attributes });
