@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import formatCurrency from '../../utils/formatCurrency';
 
+const dataTest = 'customer_order_details__element-order-details-label-delivery-status';
+
 function DetailsOrder() {
+  const { id } = useParams();
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [isDelivered, setIsDelivered] = useState(false);
@@ -35,19 +39,33 @@ function DetailsOrder() {
       <h1>Detalhes do Pedido</h1>
       <table border="1">
         <tr>
-          <td>
+          <td
+            data-testid="customer_order_details__element-order-details-label-order-id"
+          >
             pedido
             {' '}
             { mockDetails.id }
           </td>
-          <td>
+          <td
+            data-testid="customer_order_details__element-order-details-label-seller-name"
+          >
             P. vend:
             {' '}
             { mockDetails.nome }
           </td>
-          <td>{ mockDetails.data }</td>
-          <td>{ mockDetails.entregue }</td>
+          <td
+            data-testid="customer_order_details__element-order-details-label-order-date"
+          >
+            { mockDetails.data }
+          </td>
+          <td
+            data-testid={ dataTest }
+          >
+            { mockDetails.entregue }
+
+          </td>
           <button
+            data-testid="customer_order_details__button-delivery-check"
             type="button"
             name="marcarButton"
             onClick={ handleButton }
@@ -64,11 +82,42 @@ function DetailsOrder() {
         </tr>
         { cartItems.map(({ name, price, qtd, id }, index) => (
           <tr key={ index }>
-            <td>{ id }</td>
-            <td>{ name }</td>
-            <td>{ qtd }</td>
-            <td>{ formatCurrency(price) }</td>
-            <td>{ formatCurrency(qtd * price) }</td>
+            <td
+              data-testid={
+                `customer_order_details__element-order-table-item-number-${index}`
+              }
+            >
+              { id }
+            </td>
+            <td
+              data-testid={
+                `customer_order_details__element-order-table-name-${index}`
+              }
+            >
+              { name }
+
+            </td>
+            <td
+              data-testid={
+                `customer_order_details__element-order-table-quantity-${index}`
+              }
+            >
+              { qtd }
+            </td>
+            <td
+              data-testid={
+                `customer_order_details__element-order-table-sub-total-${index}`
+              }
+            >
+              { formatCurrency(price) }
+            </td>
+            <td
+              data-testid={
+                `customer_order_details__element-order-total-price-${index}`
+              }
+            >
+              { formatCurrency(qtd * price) }
+            </td>
           </tr>
         )) }
       </table>
