@@ -1,16 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import formatCurrency from '../../utils/formatCurrency';
+import { requestStatus, setToken } from '../../service/request';
 
 function TableDetailsSeller() {
+  const { id: idParams } = useParams();
+  const [isPreparing, setIsPreparing] = useState(false);
+  const [isFinish, setIsFinish] = useState(true);
+
   const dataTest = 'seller_order_details__element-order-details-label-delivery-status';
   const { orderDetails: order } = useContext(MyContext);
-  console.log('TableSeller', order);
 
-  function handleButton() {
-    console.log('marca como entregue no banco');
-  }
+  useEffect(() => {
+    if (order.status === 'Preparando') {
+      setIsPreparing(true);
+      setIsFinish(false);
+    } else if (order.status === 'Em Trânsito') {
+      setIsPreparing(true);
+    }
+  }, [order.status]);
+
+  const handleButtonState = async (body) => {
+    const { token } = JSON.parse(localStorage.getItem('user')) || [];
+    setToken(token);
+    const endPoint = `/sale/${idParams}`;
+    console.log('status', await requestStatus(endPoint, body));
+  };
   return (
     <>
       <table border="1">
@@ -37,7 +54,11 @@ function TableDetailsSeller() {
             data-testid="seller_order_details__button-preparing-check"
             type="button"
             name="marcarButton"
-            onClick={ handleButton }
+            disabled={ isPreparing }
+            onClick={ () => {
+              handleButtonState({ status: 'Preparando' });
+              setIsPreparing(true);
+            } }
           >
             Preparar Pedido
           </button>
@@ -45,8 +66,11 @@ function TableDetailsSeller() {
             data-testid="seller_order_details__button-dispatch-check"
             type="button"
             name="marcarButton"
-            onClick={ handleButton }
-            disabled="true"
+            disabled={ isFinish }
+            onClick={ () => {
+              handleButtonState({ status: 'Em Trânsito' });
+              setIsFinish(true);
+            } }
           >
             Saiu para entrega
           </button>

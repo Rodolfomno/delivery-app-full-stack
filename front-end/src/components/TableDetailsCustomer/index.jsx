@@ -1,17 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import formatCurrency from '../../utils/formatCurrency';
+import { setToken, requestStatus } from '../../service/request';
 
 function TableDetailsCustomer() {
+  const { id: idParams } = useParams();
   const dataTest = 'customer_order_details__element-order-details-label-delivery-status';
-
-  // const [isDisebled, setIsDisebled] = useState(true);
-  function handleButton() {
-    console.log('marca como entregue no banco');
-  }
-
   const { orderDetails: order } = useContext(MyContext);
+  const [isFinish, setIsFinish] = useState(true);
+
+  useEffect(() => {
+    if (order.status === 'Em Trânsito') {
+      setIsFinish(false);
+    }
+  }, [order.status]);
+
+  const handleButtonState = async (body) => {
+    const { token } = JSON.parse(localStorage.getItem('user')) || [];
+    setToken(token);
+    const endPoint = `/sale/${idParams}`;
+    console.log('status', await requestStatus(endPoint, body));
+  };
+
   console.log('compoenten', order);
   return (
     <>
@@ -47,8 +59,11 @@ function TableDetailsCustomer() {
             data-testid="customer_order_details__button-delivery-check"
             type="button"
             name="marcarButton"
-            onClick={ handleButton }
-            disabled="true"
+            onClick={ () => {
+              handleButtonState({ status: 'Entregue' });
+              setIsFinish(true);
+            } }
+            disabled={ isFinish }
           >
             Marcar como entregue
           </button>
