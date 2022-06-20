@@ -52,7 +52,7 @@ function CardOrdersSeller(props) {
           <span
             data-testid={ `seller_orders__element-card-address-${order.id}` }
           >
-            Rua tal, Bairro X numero 888
+            { `${order.deliveryAddress} ${order.deliveryNumber}` }
           </span>
         </div>
       </button>
@@ -66,6 +66,8 @@ CardOrdersSeller.propTypes = {
     saleDate: PropTypes.string,
     status: PropTypes.string,
     totalPrice: PropTypes.string,
+    deliveryAddress: PropTypes.string,
+    deliveryNumber: PropTypes.string,
   }).isRequired,
 };
 
