@@ -82,13 +82,13 @@ function Login() {
   if (isLogged) return <Navigate to={ `/${typeUser.role}/${typeUser.page}` } />;
 
   return (
-    <div>
+    <div className="container-login">
       <form
         onSubmit={ (e) => loginInto(e) }
         className="container-form"
       >
         <label htmlFor="email" className="inputs-login">
-          Email
+          Login
           <input
             data-testid="common_login__input-email"
             type="email"
@@ -99,7 +99,7 @@ function Login() {
           />
         </label>
         <label htmlFor="password" className="inputs-login">
-          Password
+          Senha
           <input
             data-testid="common_login__input-password"
             type="password"
@@ -114,6 +114,7 @@ function Login() {
           data-testid="common_login__button-login"
           type="submit"
           disabled={ isDisabled }
+          className="btn-login"
         >
           Login
 
@@ -122,6 +123,7 @@ function Login() {
           data-testid="common_login__button-register"
           type="button"
           onClick={ handleRegister }
+          className="btn-register-lg"
         >
           Ainda não tenho conta
         </button>

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import { requestCheckout, requestData, setToken } from '../../service/request';
-// import './CardDetailsAndAddress.css';
+import './CardDetailsAndAddress.css';
 
 function CardDetailsAndAddress() {
   const navigate = useNavigate();
@@ -85,6 +85,7 @@ function CardDetailsAndAddress() {
             value={ salesDetails.address }
             name="address"
             id="address"
+            className="input-address"
           />
         </label>
 
@@ -98,12 +99,14 @@ function CardDetailsAndAddress() {
             value={ salesDetails.number }
             name="number"
             id="number"
+            className="input-number"
           />
         </label>
       </div>
       <button
         data-testid="customer_checkout__button-submit-order"
         type="submit"
+        className="btn-finish"
       >
         Finallizar
       </button>

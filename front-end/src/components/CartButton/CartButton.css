@@ -1,16 +1,13 @@
 .cart-btn {
   background-color: #036b52;
   border-radius: 10px;
+  bottom: 28px;
   color: #e5e5e5;
   font-size: 1.8rem;
   font-weight: 700;
   height: 51.35px;
-
-  /* margin-left: 70%; */
-
-  /* margin-top: 480px; */
-
-  /* position: fixed; */
+  position: fixed;
+  right: 25px;
   width: 289.25px;
 }
 
