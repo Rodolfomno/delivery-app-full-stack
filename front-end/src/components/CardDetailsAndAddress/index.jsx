@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyContext from '../../context/MyContext';
 import { requestCheckout, requestData, setToken } from '../../service/request';
-// import './CardDetailsAndAddress.css';
+import './CardDetailsAndAddress.css';
 
 function CardDetailsAndAddress() {
   const navigate = useNavigate();
