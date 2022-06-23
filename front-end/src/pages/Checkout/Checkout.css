@@ -9,3 +9,15 @@
   height: 252px;
   width: 100%;
 }
+
+.title {
+  align-items: flex-end;
+  color: #343434;
+  display: flex;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 42px;
+
+
+}
