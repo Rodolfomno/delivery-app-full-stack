@@ -11,11 +11,11 @@ function Checkout() {
       <NavBar />
       <main>
         <section className="orders-conteiner">
-          <h2>Finalizar Pedidos</h2>
+          <h2 className="title">Finalizar Pedidos</h2>
           <TableCheckout />
         </section>
         <section className="delivery-container">
-          <h2>Detalhes e Endereço de Entrega</h2>
+          <h2 className="title">Detalhes e Endereço de Entrega</h2>
           <CardDetailsAndAddress />
         </section>
       </main>

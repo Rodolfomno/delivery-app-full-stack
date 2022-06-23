@@ -103,6 +103,7 @@ function Register() {
           data-testid="common_register__button-register"
           type="submit"
           disabled={ isDisabled }
+          className="btn-register"
         >
           Cadastrar
         </button>

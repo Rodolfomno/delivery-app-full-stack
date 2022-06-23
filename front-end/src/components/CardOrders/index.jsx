@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-// import './cardOrders.css';
+import './cardOrders.css';
 
 function CardOrders(props) {
   const navigate = useNavigate();
