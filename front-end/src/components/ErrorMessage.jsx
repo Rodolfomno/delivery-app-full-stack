@@ -6,7 +6,7 @@ function ErrorMessage({ testid }) {
     <span
       data-testid={ testid }
     >
-      Mensagem de erro!
+      Usuário ou senha inválido!
     </span>
   );
 }
